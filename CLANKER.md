@@ -93,10 +93,11 @@ Do not use single-character variable names. Do not code golf.
 ## IMPORTANT: Use dry, simple, concrete, technical language in code
 When writing code all of the "minimize AI slop" rules apply.
 Name things in the simplest, purely technical language.
-The following words are FORBIDDEN and should NEVER be used in code nor in any message in code: `ran`, `landed`, `land`, `given`, `give`, `settled`, `settle`, `held`, `holds`, `holding`, `says`, `names`, `named`, etc.
+The following words are FORBIDDEN and should NEVER be used in code nor in any message in code: `ran`, `landed`, `land`, `given`, `give`, `settled`, `settle`, `held`, `holds`, `holding`, `says`, `names`, `named`, `reach`, `reaches`, `keep`, `keeps`, etc.
 Never use past participle in code.
 Always name things in *concrete* terms, for example:
   - do not write "written_at"; write "write_timestamp"
+  - do not name a field "was" or "original"; write what it actually was, for example, "previous_name"
 
 ## Prefer integration tests over unit tests
 When possible write tests which test the high level behavior.
