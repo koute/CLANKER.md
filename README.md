@@ -4,6 +4,8 @@
 
 This is my customized system prompt for LLMs, mainly targetting Claude, derived from Claude Code's default system prompt and heavily modified.
 
+It also contains potentially useful prompts in the `prompts` directory, ready to be copy-pasted.
+
 ## How to use this?
 
 Put it in your ~/.claude and then run (I recommend making an alias):
