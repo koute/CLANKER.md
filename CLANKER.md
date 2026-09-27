@@ -61,6 +61,7 @@ Do not use invented shorthands or heavy jargon. Say what something actually is.
 Never use metaphors or rhetorical flourishes. Never anthropomorphize.
 For example, a file does not "sit" in a directory; it "exists" there ("sit" implies it could also "stand"). A problem does not "bite"; it "occurs" (a problem has no mouth).
 No proverb symmetry ("teams change, topics stay"). No balanced contrast ("is a copy, not a rewrite"). No novelist's diction ("enters", "the latter case"). No wordplay.
+Always use sentential/predicate negation over negative determiners, for example do not say "forwards no key", say "doesn’t forward a key"; do not say "runs nothing", say "doesn't run anything".
 Be concrete. Do not use vague imperatives like "name them", "belongs elsewhere" or "that's all it takes".
 Never use fancy vocabulary. Use dry, technical, non-literary words. For example:
   - do not say "carry"; say "continue"
@@ -69,6 +70,7 @@ Never use fancy vocabulary. Use dry, technical, non-literary words. For example:
   - do not say "asked"; say "requested"
   - do not say "refuses"; say "rejects"
   - do not say "holds"; say "contains"
+  - do not say "proves"; say "verifies"
 Use direct, dry, technical language. Avoid phrases and names that read as sentences or narrate. For example:
   - do not say "asked to think"; say "thinking enabled"
   - do not say "what was checked, not assumed"; say "what I checked"
@@ -76,6 +78,7 @@ Use direct, dry, technical language. Avoid phrases and names that read as senten
   - do not say "where it stopped"; say "stopping point"
   - do not say "for a reason worth writing down"; say "for an important reason"
   - do not say "was never written down"; say "was never documented"
+  - do not say "every tool has a label of its own"; say "every tool has a unique label"
 Write like a software engineer with no literary skill.
 Never use abstract, soft phrasing that does not say what something is, or that only passively refers to something.
 Never use passive voice. Use active voice. For example, do not say "the last message wasn't written down"; say "the last message doesn't exist".
@@ -92,12 +95,17 @@ Do not use single-character variable names. Do not code golf.
 
 ## IMPORTANT: Use dry, simple, concrete, technical language in code
 When writing code all of the "minimize AI slop" rules apply.
-Name things in the simplest, purely technical language.
-The following words are FORBIDDEN and should NEVER be used in code nor in any message in code: `ran`, `landed`, `land`, `given`, `give`, `settled`, `settle`, `held`, `holds`, `holding`, `says`, `names`, `named`, `reach`, `reaches`, `keep`, `keeps`, etc.
+Name things in the simplest, purely technical language. ALWAYS write in brutalist ASD-STE100-inspired style.
+The following words are FORBIDDEN and should NEVER be used in code nor in any message in code: `ran`, `landed`, `land`, `given`, `give`, `settled`, `settle`, `held`, `hold`, `holds`, `holding`, `says`, `names`, `named`, `name` as a verb, `reach`, `reaches`, `keep`, `keeps`, `wants`, `tries`, `ask`, `asked`, `arm`, `arms`, `refuse`, `refuses`, `deserves`, `answered`, `offer`, `offered`, `wanted`, `waited`, etc.
 Never use past participle in code.
 Always name things in *concrete* terms, for example:
   - do not write "written_at"; write "write_timestamp"
   - do not name a field "was" or "original"; write what it actually was, for example, "previous_name"
+Name things with a noun phrase. Never put a verb in a name. Write the subject. Do not write what the subject does. For example:
+  - do not write "test_the_tools_keep_their_schema"; write "test_tool_schema"
+  - do not write "test_thinking_takes_a_numeric_effort_as_its_budget"; write "test_numeric_thinking_budget"
+Scan every name you write for an article (a, an, the), a possessive (its, their), a demonstrative (that, this) or an auxiliary (is, are, has, does, can, cannot). Delete the name and write a noun phrase when you find one. The Rust is_/has_ predicate prefix is exempt from this rule.
+Never ascribe an action to machinery. Do not write that something needs, wants, tries, refuses, keeps, deserves or similar. Write the property. Ignore the naming style of the surrounding code if it conflicts with these rules.
 
 ## Prefer integration tests over unit tests
 When possible write tests which test the high level behavior.
