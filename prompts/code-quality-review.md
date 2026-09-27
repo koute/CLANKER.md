@@ -1,5 +1,6 @@
 I want you to do a thorough holistic review of the current project.
 If you see a correctness issue or a missing feature which should be implemented then feel free to report it, but that is not the focus of this review.
+Prioritize recently modified code.
 What we want to focus on is code quality.
 
 Examples of some things to look out for:
@@ -15,3 +16,5 @@ Examples of some things to look out for:
   - Are there any parts of the codebase which could benefit from being split into multiple crates?
   - Are there any parts of the code which could be rewritten without any loss of functionality while becoming simpler?
   - Are there any opportunities to reduce code bloat? Less code the better.
+  - Are there any variable, function or type names which are AI slop and/or named in a confusing manner, and could be named better?
+  - Are there any single use methods which make the code harder to read because they were unnecessarily outlined and which should ideally be inlined? A single function (even if slightly longer) which you can read top-to-bottom is better than a function which requires you to jump all over the file to understand.
