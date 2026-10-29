@@ -142,12 +142,30 @@ Make small, self-contained commits.
 Never `git push`; I review and rebase the full history and push myself.
 Commit messages exist so that I can review your work. Keep them *short* and single-line.
 
+## Prioritize code quality
+Here's a checklist of things related to code qualiny on which you should keep an eye on when working; apply these as you work for any and all new code you write:
+  - Are there any places in the code where the same information is maintained in multiple places, and could be unified? (i.e. prefer to have a single source of truth)
+  - Are there any places in the code where the same/similar code is maintained in multiple places, and could be unified? (i.e. a check for X in multiple places should be unified so that the check is done only in a single place)
+  - Are there any places in the code where invalid states are representable? (for example, we have an enum `Entry::CreateNode` which contains `kind: NodeKind::{File, Directory}, bytes: &[u8]`, so `bytes` is nonsense when kind is a directory)
+  - Are there any places in the code where a layering violation happens? (i.e. high level business logic *directly* checks low-level detais which should have been abstracte away with a method call)
+  - Are there any fields or parameters which use raw, primitive types, but could be better served by a newtype, either to validate correctness, or for readability?
+  - Are there any objects/structs which devolved into a "ball of mud" with many fields/methods, which could be split?
+  - Are there any parts of the code which could benefit from refactoring it in a layered fashion? That is: instead of growing an existing single object, split it by layering/composing multiple objects on top?
+  - Are there any pairs of modules which are closely entangled with each other's internals and could use a refactoring to use a proper interface between them?
+  - Are there any modules which accrued functionality over time, became a "ball of mud", and which should be split into multiple modules?
+  - Are there any parts of the codebase which could benefit from being split into multiple crates?
+  - Are there any parts of the code which could be rewritten without any loss of functionality while becoming simpler?
+  - Are there any opportunities to reduce code bloat? Less code the better.
+  - Are there any variable, function or type names which are AI slop and/or named in a confusing manner, and could be named better? Variable names should usually be nouns. Functions and methods should usually contain a verb, unless they're a cheap/zero-cost reader.
+  - Are there any single use methods which make the code harder to read because they were unnecessarily outlined and which should ideally be inlined? A single function (even if slightly longer) which you can read top-to-bottom is better than a function which requires you to jump all over the file to understand.
+
 ## Language-specific guidelines: Rust
 When writing Rust:
   - treat the `expect` message as an assertion failure message; do *not* state what was expected; for example, instead of `expect("JSON is valid")` write `expect("invalid JSON")`
   - chained error messages should always start with a lowercase letter; for example, instead of `.map_err(|error| format!("Failed to open '{path}': {path}"))` write `.map_err(|error| format!("failed to open '{path}': {path}"))`
   - error messages must be complete on their own, so callers only have to write `?`; for example, callers should be able to write `read_file(path)?` instead of having to do `read_file(path).map_err(|error| format!("failed to read '{path}': {error}"))?` (i.e. do this **inside** `read_file`)
   - use newtypes when appropriate
+  - do NOT write assertion error messages in tests
   - IMPORTANT: make illegal states unrepresentable
 
 ## Maintain an `.agent` directory
@@ -162,4 +180,7 @@ Create and maintain an `.agent` directory for your exclusive use. Everything out
 
 When starting with a fresh context, read `.agent/STATUS.md` and `.agent/MEMORY.md` first.
 
-You run in a sandbox with `sudo` access. Installed packages and `/tmp` do not persist; install anything that must persist in a subdirectory under `.agent`. Prefer `uv` over `pip`.
+You run in a sandbox with `sudo` access; you can install new packages, but installed packages and `/tmp` do not persist when your sandbox is restarted. Install anything that must persist in a subdirectory under `.agent`. Prefer `uv` over `pip`.
+
+`pkill -f <path>` from a shell whose command line contains the path kills that shell too; use a PID file instead.
+When you want to wait for a process to finish never use `sleep`; instead directly wait for the process to exit (with a timeout, to protect yourself it case the process you're waiting on never exits).

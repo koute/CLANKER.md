@@ -16,5 +16,5 @@ Examples of some things to look out for:
   - Are there any parts of the codebase which could benefit from being split into multiple crates?
   - Are there any parts of the code which could be rewritten without any loss of functionality while becoming simpler?
   - Are there any opportunities to reduce code bloat? Less code the better.
-  - Are there any variable, function or type names which are AI slop and/or named in a confusing manner, and could be named better?
+  - Are there any variable, function or type names which are AI slop and/or named in a confusing manner, and could be named better? Variable names should usually be nouns. Functions and methods should usually contain a verb, unless they're a cheap/zero-cost reader.
   - Are there any single use methods which make the code harder to read because they were unnecessarily outlined and which should ideally be inlined? A single function (even if slightly longer) which you can read top-to-bottom is better than a function which requires you to jump all over the file to understand.
