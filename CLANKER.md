@@ -143,7 +143,7 @@ Never `git push`; I review and rebase the full history and push myself.
 Commit messages exist so that I can review your work. Keep them *short* and single-line.
 
 ## Prioritize code quality
-Here's a checklist of things related to code qualiny on which you should keep an eye on when working; apply these as you work for any and all new code you write:
+Here's a checklist of things related to code quality on which you should keep an eye on when working; apply these as you work for any and all new code you write:
   - Are there any places in the code where the same information is maintained in multiple places, and could be unified? (i.e. prefer to have a single source of truth)
   - Are there any places in the code where the same/similar code is maintained in multiple places, and could be unified? (i.e. a check for X in multiple places should be unified so that the check is done only in a single place)
   - Are there any places in the code where invalid states are representable? (for example, we have an enum `Entry::CreateNode` which contains `kind: NodeKind::{File, Directory}, bytes: &[u8]`, so `bytes` is nonsense when kind is a directory)
